@@ -22,6 +22,7 @@ protocol GamePresenterInterface: class {
     func pickRandomWord()
     func moveNextWord()
     func resetWordLabelPosition()
+    func getWordsCount() -> Int?
 }
 
 extension GamePresenter {
@@ -43,7 +44,7 @@ final class GamePresenter: GamePresenterInterface {
     weak var view: GameViewControllerInterface?
     let router: GameRouterInterface!
     let interactor: GameInteractorInterface!
-    private var words: [WordElement] = []
+    private var words: [WordElement]?
     private var score: Int = Constants.scoreInitialValue
     private var round: Int = Constants.roundInitialValue
     private var isGameFinished: Bool = false
@@ -52,7 +53,9 @@ final class GamePresenter: GamePresenterInterface {
     private var roundLimit: Int = 0
     private var currentIndex: Int = 0 {
         didSet {
-            currentIndex = Int.random(in: 0..<words.count)
+            if let wordsCount = getWordsCount() {
+                currentIndex = Int.random(in: 0..<wordsCount)
+            }
         }
     }
     
@@ -111,7 +114,7 @@ final class GamePresenter: GamePresenterInterface {
     
     func checkAnswer(myAnswer: Bool) {
         if round <= roundLimit && isGameFinished == false {
-            let answer = words[currentIndex].textEng == wordText
+            let answer = words?[currentIndex].textEng == wordText
             if myAnswer == answer {
                 view?.showToastMessage(text: Constants.rightAnswerText)
                 score += 1
@@ -146,21 +149,29 @@ final class GamePresenter: GamePresenterInterface {
     }
     
     func pickRightWord() {
-        let word = words[currentIndex]
-        wordText = word.textEng
-        translationText = word.textSPA
+        if let word = words?[safe: currentIndex] {
+            wordText = word.textEng
+            translationText = word.textSPA
+        }
     }
     
     func pickRandomWord() {
-        let word = words[currentIndex]
-        let randomWordIndex = Int.random(in: 0..<words.count)
-        let randomWord = words[randomWordIndex]
-        wordText = randomWord.textEng
-        translationText = word.textSPA
+        if let word = words?[safe: currentIndex] {
+            translationText = word.textSPA
+        }
+        
+        if let wordsCount = getWordsCount() {
+            let randomWordIndex = Int.random(in: 0..<wordsCount)
+            if let randomWord = words?[safe: randomWordIndex] {
+                wordText = randomWord.textEng
+            }
+        }
     }
 
     func moveNextWord() {
-        currentIndex = Int.random(in: 0..<words.count)
+        if let wordsCount = getWordsCount() {
+            currentIndex = Int.random(in: 0..<wordsCount)
+        }
         
         let number = Int.random(in: 0...9)
         if number % 2 == 0 {
@@ -176,13 +187,17 @@ final class GamePresenter: GamePresenterInterface {
         startFallingWordLabel()
     }
     
+    func getWordsCount() -> Int? {
+        words?.count
+    }
+    
 }
 
 extension GamePresenter: GameInteractorOutput {
     func fetchWordDataOutput(result: WordResult) {
         switch result {
         case .success(let wordsResult):
-            words.append(contentsOf: wordsResult)
+            words = wordsResult
         case .failure(let error):
             view?.showToastMessage(text: error.localizedDescription)
         }

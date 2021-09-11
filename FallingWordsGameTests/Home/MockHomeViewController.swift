@@ -10,9 +10,6 @@
 import UIKit
 
 final class MockHomeViewController: HomeViewControllerInterface {
-    func showLoadingView() {}
-    
-    func hideLoadingView() {}
 
     var invokedSetTitle = false
     var invokedSetTitleCount = 0

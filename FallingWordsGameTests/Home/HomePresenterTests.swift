@@ -30,6 +30,7 @@ class HomePresenterTests: XCTestCase {
         presenter.viewDidLoad()
         
         XCTAssertTrue(view.invokedSetTitle)
+        XCTAssertTrue(view.invokedSetTitle)
         XCTAssertEqual(view.invokedSetTitleParameters?.title, "Falling Words")
     }
 }

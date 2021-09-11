@@ -9,14 +9,12 @@
 import UIKit
 
 protocol HomeViewControllerInterface: AnyObject {
-    func showLoadingView()
-    func hideLoadingView()
     func setTitle(_ title: String)
     func getTimeIntervalValue() -> Int
     func getRoundValue() -> Int
 }
 
-final class HomeViewController: BaseViewController, LoadingShowable {
+final class HomeViewController: BaseViewController {
     var presenter: HomePresenterInterface!
     @IBOutlet private weak var goButton: UIButton!
     @IBOutlet private weak var timeIntervalTextfield: UITextField!
@@ -33,15 +31,7 @@ final class HomeViewController: BaseViewController, LoadingShowable {
 }
 
 extension HomeViewController: HomeViewControllerInterface {
-    
-    func showLoadingView() {
-        showLoading()
-    }
-    
-    func hideLoadingView() {
-        hideLoading()
-    }
-    
+        
     func setTitle(_ title: String) {
         self.title = title
     }

@@ -12,6 +12,11 @@
 		F991936526ED47F7009CD2C9 /* MockHomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991936426ED47F7009CD2C9 /* MockHomeRouter.swift */; };
 		F991936726ED4850009CD2C9 /* HomePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991936626ED4850009CD2C9 /* HomePresenterTests.swift */; };
 		F991936926ED48FE009CD2C9 /* MockHomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991936826ED48FE009CD2C9 /* MockHomeInteractor.swift */; };
+		F991936C26ED4BD5009CD2C9 /* MockGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991936B26ED4BD5009CD2C9 /* MockGameViewController.swift */; };
+		F991936E26ED4C0E009CD2C9 /* MockGameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991936D26ED4C0E009CD2C9 /* MockGameInteractor.swift */; };
+		F991937026ED4C5A009CD2C9 /* MockGameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991936F26ED4C5A009CD2C9 /* MockGameRouter.swift */; };
+		F991937226ED4D82009CD2C9 /* GamePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991937126ED4D82009CD2C9 /* GamePresenterTests.swift */; };
+		F991937426ED505F009CD2C9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991937326ED505F009CD2C9 /* Extensions.swift */; };
 		F9CF7DEB26EC9E330071EC12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9CF7DEA26EC9E330071EC12 /* Assets.xcassets */; };
 		F9CF7DEE26EC9E330071EC12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CF7DEC26EC9E330071EC12 /* LaunchScreen.storyboard */; };
 		F9CF7E0826EC9F300071EC12 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF7E0426EC9F300071EC12 /* SplashPresenter.swift */; };
@@ -57,6 +62,11 @@
 		F991936426ED47F7009CD2C9 /* MockHomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeRouter.swift; sourceTree = "<group>"; };
 		F991936626ED4850009CD2C9 /* HomePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenterTests.swift; sourceTree = "<group>"; };
 		F991936826ED48FE009CD2C9 /* MockHomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeInteractor.swift; sourceTree = "<group>"; };
+		F991936B26ED4BD5009CD2C9 /* MockGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGameViewController.swift; sourceTree = "<group>"; };
+		F991936D26ED4C0E009CD2C9 /* MockGameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGameInteractor.swift; sourceTree = "<group>"; };
+		F991936F26ED4C5A009CD2C9 /* MockGameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGameRouter.swift; sourceTree = "<group>"; };
+		F991937126ED4D82009CD2C9 /* GamePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenterTests.swift; sourceTree = "<group>"; };
+		F991937326ED505F009CD2C9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F9CF7DDE26EC9E310071EC12 /* FallingWordsGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FallingWordsGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9CF7DEA26EC9E330071EC12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9CF7DED26EC9E330071EC12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -118,6 +128,17 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		F991936A26ED4BAF009CD2C9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				F991936B26ED4BD5009CD2C9 /* MockGameViewController.swift */,
+				F991936D26ED4C0E009CD2C9 /* MockGameInteractor.swift */,
+				F991936F26ED4C5A009CD2C9 /* MockGameRouter.swift */,
+				F991937126ED4D82009CD2C9 /* GamePresenterTests.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
 		F9CF7DD526EC9E310071EC12 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +173,7 @@
 		F9CF7DF726EC9E330071EC12 /* FallingWordsGameTests */ = {
 			isa = PBXGroup;
 			children = (
+				F991936A26ED4BAF009CD2C9 /* Game */,
 				F991935E26ED46BD009CD2C9 /* Home */,
 				F9CF7DFA26EC9E330071EC12 /* Info.plist */,
 			);
@@ -248,6 +270,7 @@
 			children = (
 				F9CF7E3726ECA63F0071EC12 /* Views */,
 				F9CF7E3426ECA5F00071EC12 /* Utils */,
+				F991937326ED505F009CD2C9 /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -382,6 +405,7 @@
 				F9CF7E3A26ECA6730071EC12 /* LoadingView.swift in Sources */,
 				F9CF7E1426ECA0DC0071EC12 /* SceneDelegate.swift in Sources */,
 				F9CF7E0B26EC9F300071EC12 /* SplashInteractor.swift in Sources */,
+				F991937426ED505F009CD2C9 /* Extensions.swift in Sources */,
 				F9CF7E3326ECA5460071EC12 /* BaseViewController.swift in Sources */,
 				F9CF7E3F26ECBC1E0071EC12 /* BaseButton.swift in Sources */,
 				F9CF7E0926EC9F300071EC12 /* SplashRouter.swift in Sources */,
@@ -401,9 +425,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F991937226ED4D82009CD2C9 /* GamePresenterTests.swift in Sources */,
 				F991936526ED47F7009CD2C9 /* MockHomeRouter.swift in Sources */,
 				F991936926ED48FE009CD2C9 /* MockHomeInteractor.swift in Sources */,
 				F991936026ED46CF009CD2C9 /* MockHomeViewController.swift in Sources */,
+				F991937026ED4C5A009CD2C9 /* MockGameRouter.swift in Sources */,
+				F991936C26ED4BD5009CD2C9 /* MockGameViewController.swift in Sources */,
+				F991936E26ED4C0E009CD2C9 /* MockGameInteractor.swift in Sources */,
 				F991936726ED4850009CD2C9 /* HomePresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
