@@ -36,7 +36,10 @@ final class HomePresenter: HomePresenterInterface {
     }
     
     func navigateToGameScreen() {
-        router.navigate(.game)
+        let timeInterval = view?.getTimeIntervalValue() ?? .zero
+        let roundValue = view?.getRoundValue() ?? .zero
+        router.navigate(.game(timeInterval: timeInterval,
+                              round: roundValue))
     }
 }
 

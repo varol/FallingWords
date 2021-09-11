@@ -13,7 +13,7 @@ protocol HomeRouterInterface: AnyObject {
 }
 
 enum HomeRoutes {
-    case game
+    case game(timeInterval: Int, round: Int)
 }
 
 class HomeRouter {
@@ -38,8 +38,10 @@ extension HomeRouter: HomeRouterInterface {
 
     func navigate(_ route: HomeRoutes) {
         switch route {
-        case .game:
+        case .game(let timeInterval, let round):
             let vc = GameRouter.setupModule()
+            vc.timeIntervalValue = timeInterval
+            vc.roundValue = round
             viewController?.navigationController?.pushViewController(vc, animated: true)
         }
     }

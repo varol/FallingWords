@@ -10,6 +10,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="FallingWordsGame" customModuleProvider="target">
             <connections>
                 <outlet property="goButton" destination="InP-YD-Pe9" id="0nR-fp-tqQ"/>
+                <outlet property="roundTextfield" destination="qzo-if-9Ja" id="hZr-sH-xya"/>
+                <outlet property="timeIntervalTextfield" destination="Yfr-Tb-TL5" id="3xT-QJ-H41"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,23 +20,80 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InP-YD-Pe9">
-                    <rect key="frame" x="180" y="513" width="54" height="49"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InP-YD-Pe9" customClass="BaseButton" customModule="FallingWordsGame">
+                    <rect key="frame" x="169.5" y="395" width="75" height="60"/>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="GO!"/>
                     <connections>
                         <action selector="goButtonTapped:" destination="-1" eventType="touchUpInside" id="kaj-Rl-pwP"/>
                     </connections>
                 </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="czB-et-wkh">
+                    <rect key="frame" x="81" y="243" width="252" height="102"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKy-u3-aV1">
+                            <rect key="frame" x="0.0" y="0.0" width="252" height="36"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Interval   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9b-R7-Yxf">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="36"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="200" id="gFv-h9-9bL"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="5" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yfr-Tb-TL5">
+                                    <rect key="frame" x="200" y="0.0" width="52" height="36"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6b0-NV-57B">
+                            <rect key="frame" x="0.0" y="66" width="252" height="36"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Round" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2m-Ar-goc">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="36"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="200" id="gsr-OY-jvh"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qzo-if-9Ja">
+                                    <rect key="frame" x="200" y="0.0" width="52" height="36"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="pQn-tx-Obs">
+                    <rect key="frame" x="92" y="69" width="230" height="124"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="230" id="QRu-Zx-avP"/>
+                        <constraint firstAttribute="height" constant="124" id="Uu2-9G-UUf"/>
+                    </constraints>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="0.43529411759999997" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="InP-YD-Pe9" secondAttribute="bottom" constant="300" id="Izo-cO-HrR"/>
-                <constraint firstItem="InP-YD-Pe9" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Nkw-Nl-Qma"/>
+                <constraint firstItem="czB-et-wkh" firstAttribute="top" secondItem="pQn-tx-Obs" secondAttribute="bottom" constant="50" id="CFB-AU-UV7"/>
+                <constraint firstItem="pQn-tx-Obs" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JJv-tx-mI2"/>
+                <constraint firstItem="InP-YD-Pe9" firstAttribute="top" secondItem="czB-et-wkh" secondAttribute="bottom" constant="50" id="QOb-xb-Rx7"/>
+                <constraint firstItem="czB-et-wkh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Rz4-2p-X4T"/>
+                <constraint firstItem="InP-YD-Pe9" firstAttribute="centerX" secondItem="czB-et-wkh" secondAttribute="centerX" id="ZAk-45-i97"/>
+                <constraint firstItem="pQn-tx-Obs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="25" id="x9S-06-y4N"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="141" y="151"/>
         </view>
     </objects>
+    <resources>
+        <image name="logo" width="2638" height="579"/>
+    </resources>
 </document>

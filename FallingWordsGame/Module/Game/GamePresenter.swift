@@ -12,11 +12,8 @@ protocol GamePresenterInterface: class {
     func viewDidLoad()
     func getWordLabelInitialPosition() -> Int
     func getWordLabelFinishPosition() -> Int
-    func getGameTimeInterval() -> Int
-    func setWordLabelText()
-    func setTranslationText()
     func loadInitialData()
-    func fallWordLabel()
+    func startFallingWordLabel()
     func chooseRightAnswer()
     func chooseWrongAnswer()
     func checkAnswer(myAnswer: Bool)
@@ -30,11 +27,15 @@ protocol GamePresenterInterface: class {
 extension GamePresenter {
     fileprivate enum Constants {
         static let bottomPosition: Int = 320
-        static let gameTimeInterval: Int = 5
         static let roundInitialValue: Int = 1
         static let wordLabelInitialPosition: Int = 135
         static let scoreInitialValue: Int = .zero
         static let pageTitle: String = "Falling Words"
+        static let scoreText: String = "Score:"
+        static let roundText: String = "Round:"
+        static let rightAnswerText: String = "Right 👍"
+        static let wrongAnswerText: String = "Wrong 👎"
+        static let finishedGameText: String = "Finished 🏁"
     }
 }
 
@@ -44,11 +45,11 @@ final class GamePresenter: GamePresenterInterface {
     let interactor: GameInteractorInterface!
     private var words: [WordElement] = []
     private var score: Int = Constants.scoreInitialValue
-    private var time: Int = Constants.gameTimeInterval
     private var round: Int = Constants.roundInitialValue
     private var isGameFinished: Bool = false
     private var wordText: String = ""
     private var translationText: String = ""
+    private var roundLimit: Int = 0
     private var currentIndex: Int = 0 {
         didSet {
             currentIndex = Int.random(in: 0..<words.count)
@@ -78,30 +79,25 @@ final class GamePresenter: GamePresenterInterface {
         guard let viewHeight = view?.getViewHeight() else { return .zero}
         return viewHeight - Constants.bottomPosition
     }
-    
-    func getGameTimeInterval() -> Int {
-        Constants.gameTimeInterval
+        
+    fileprivate func setScoreLabel() {
+        view?.setScoreLabelText(text: "\(Constants.scoreText) \(score)")
     }
     
-    func setWordLabelText() {
-        let wordText = words[2]
-        view?.setWordLabelText(text: wordText.textEng)
-    }
-    
-    func setTranslationText() {
-        let translationText = words[2]
-        view?.setTranslationLabelText(text: translationText.textSPA)
+    fileprivate func setRoundLabel() {
+        view?.setRoundLabelText(text: "\(Constants.roundText) \(round)")
     }
     
     func loadInitialData() {
+        roundLimit = view?.getRoundValue() ?? .zero
         moveNextWord()
-        view?.setScoreLabelText(text: "Score: \(score)")
-        view?.setRoundLabelText(text: "Round: \(round)")
+        setScoreLabel()
+        setRoundLabel()
     }
         
-    func fallWordLabel() {
+    func startFallingWordLabel() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.view?.fallWordLabel()
+            self.view?.startFallingWordLabel()
         }
     }
     
@@ -114,26 +110,26 @@ final class GamePresenter: GamePresenterInterface {
     }
     
     func checkAnswer(myAnswer: Bool) {
-        if round <= 10 && isGameFinished == false {
+        if round <= roundLimit && isGameFinished == false {
             let answer = words[currentIndex].textEng == wordText
             if myAnswer == answer {
-                view?.showToastMessage(text: "Right 👍")
+                view?.showToastMessage(text: Constants.rightAnswerText)
                 score += 1
-                view?.setScoreLabelText(text: "Score: \(score)")
+                setScoreLabel()
             } else {
-                view?.showToastMessage(text: "Wrong 👎")
+                view?.showToastMessage(text: Constants.wrongAnswerText)
             }
             
-            if round < 10 {
+            if round < roundLimit {
                 round += 1
-                view?.setRoundLabelText(text: "Round: \(round)")
+                setRoundLabel()
                 moveNextWord()
             } else {
                 isGameFinished = true
-                view?.showToastMessage(text: "Finished 🏁")
+                view?.showToastMessage(text: Constants.finishedGameText)
             }
         } else {
-            view?.showToastMessage(text: "Finished 🏁")
+            view?.showToastMessage(text: Constants.finishedGameText)
         }
     }
     
@@ -142,9 +138,9 @@ final class GamePresenter: GamePresenterInterface {
     }
     
     func timeFinishedAction() {
-        if round < 10 {
+        if round < roundLimit {
             round += 1
-            view?.setRoundLabelText(text: "Round: \(round)")
+            setRoundLabel()
             moveNextWord()
         }
     }
@@ -177,7 +173,7 @@ final class GamePresenter: GamePresenterInterface {
         view?.setTranslationLabelText(text: translationText)
         resetWordLabelPosition()
         
-        fallWordLabel()
+        startFallingWordLabel()
     }
     
 }
@@ -188,7 +184,7 @@ extension GamePresenter: GameInteractorOutput {
         case .success(let wordsResult):
             words.append(contentsOf: wordsResult)
         case .failure(let error):
-            print(error)
+            view?.showToastMessage(text: error.localizedDescription)
         }
     }
 }

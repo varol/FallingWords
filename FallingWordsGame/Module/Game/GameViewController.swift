@@ -10,7 +10,7 @@ import UIKit
 
 protocol GameViewControllerInterface: class {
     func setTitle(_ title: String)
-    func fallWordLabel()
+    func startFallingWordLabel()
     func resetWordLabelPosition()
     func getViewHeight() -> Int
     func setWordLabelText(text: String)
@@ -18,34 +18,31 @@ protocol GameViewControllerInterface: class {
     func setScoreLabelText(text: String)
     func setRoundLabelText(text: String)
     func showToastMessage(text: String)
-    func getAnimationStatus() -> Bool
+    func getRoundValue() -> Int
 }
 
-class GameViewController: UIViewController {
+class GameViewController: BaseViewController {
     @IBOutlet private weak var scoreLabel: BaseLabel!
     @IBOutlet private weak var wordLabel: BaseLabel!
     @IBOutlet private weak var translationLabel: BaseLabel!
     @IBOutlet private weak var roundLabel: BaseLabel!
     
     var presenter: GamePresenterInterface!
-    var animator: UIViewPropertyAnimator?
-    private var fallingWordYPossition: CGFloat = 0
-
+    var timeIntervalValue: Int?
+    var roundValue: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
     }
     
     @IBAction private func rightAnswerButtonTapped() {
-        view.layer.removeAllAnimations()
         presenter.chooseRightAnswer()
     }
     
     @IBAction func wrongAnswerButtonTapped(_ sender: Any) {
-        view.layer.removeAllAnimations()
         presenter.chooseWrongAnswer()
     }
-    
 }
 
 extension GameViewController: GameViewControllerInterface {
@@ -57,8 +54,8 @@ extension GameViewController: GameViewControllerInterface {
         Int(view.frame.size.height)
     }
     
-    func fallWordLabel() {
-        let duration = TimeInterval(self.presenter.getGameTimeInterval())
+    func startFallingWordLabel() {
+        let duration = TimeInterval(timeIntervalValue ?? .zero)
         
         UIView.animate(withDuration: duration,
                        delay: .zero,
@@ -108,7 +105,7 @@ extension GameViewController: GameViewControllerInterface {
         view.makeToast(text)
     }
     
-    func getAnimationStatus() -> Bool {
-        animator?.isRunning ?? false
+    func getRoundValue() -> Int {
+        roundValue ?? .zero
     }
 }
