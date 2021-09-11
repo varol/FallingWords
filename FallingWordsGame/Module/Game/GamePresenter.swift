@@ -19,14 +19,19 @@ protocol GamePresenterInterface: class {
     func fallWordLabel()
     func chooseRightAnswer()
     func chooseWrongAnswer()
-    func isAnswerRight(answer: String) -> Bool
+    func checkAnswer(myAnswer: Bool)
     func timeFinishedAction()
+    func pickRightWord()
+    func pickRandomWord()
+    func moveNextWord()
+    func resetWordLabelPosition()
 }
 
 extension GamePresenter {
     fileprivate enum Constants {
-        static let bottomPosition: Int = 180
+        static let bottomPosition: Int = 320
         static let gameTimeInterval: Int = 5
+        static let roundInitialValue: Int = 1
         static let wordLabelInitialPosition: Int = 135
         static let scoreInitialValue: Int = .zero
         static let pageTitle: String = "Falling Words"
@@ -40,7 +45,16 @@ final class GamePresenter: GamePresenterInterface {
     private var words: [WordElement] = []
     private var score: Int = Constants.scoreInitialValue
     private var time: Int = Constants.gameTimeInterval
-
+    private var round: Int = Constants.roundInitialValue
+    private var isGameFinished: Bool = false
+    private var wordText: String = ""
+    private var translationText: String = ""
+    private var currentIndex: Int = 0 {
+        didSet {
+            currentIndex = Int.random(in: 0..<words.count)
+        }
+    }
+    
     init(interactor: GameInteractorInterface,
          router: GameRouterInterface,
          view: GameViewControllerInterface) {
@@ -54,9 +68,6 @@ final class GamePresenter: GamePresenterInterface {
         view?.setTitle(Constants.pageTitle)
         interactor.fetchWordData()
         loadInitialData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.fallWordLabel()
-        }
     }
 
     func getWordLabelInitialPosition() -> Int {
@@ -83,34 +94,92 @@ final class GamePresenter: GamePresenterInterface {
     }
     
     func loadInitialData() {
-        let word = words.randomElement()
-        view?.setWordLabelText(text: word?.textEng ?? "")
-        view?.setTranslationLabelText(text: word?.textSPA ?? "")
-        view?.setTimeLabelText(text: "Time: \(time)")
+        moveNextWord()
         view?.setScoreLabelText(text: "Score: \(score)")
+        view?.setRoundLabelText(text: "Round: \(round)")
     }
-    
+        
     func fallWordLabel() {
-        view?.fallWordLabel()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.view?.fallWordLabel()
+        }
     }
     
     func chooseRightAnswer() {
-        print("right")
+        checkAnswer(myAnswer: true)
     }
     
     func chooseWrongAnswer() {
-        print("wrong")
+        checkAnswer(myAnswer: false)
     }
     
-    func isAnswerRight(answer: String) -> Bool {
-        return true
+    func checkAnswer(myAnswer: Bool) {
+        if round <= 10 && isGameFinished == false {
+            let answer = words[currentIndex].textEng == wordText
+            if myAnswer == answer {
+                view?.showToastMessage(text: "Right 👍")
+                score += 1
+                view?.setScoreLabelText(text: "Score: \(score)")
+            } else {
+                view?.showToastMessage(text: "Wrong 👎")
+            }
+            
+            if round < 10 {
+                round += 1
+                view?.setRoundLabelText(text: "Round: \(round)")
+                moveNextWord()
+            } else {
+                isGameFinished = true
+                view?.showToastMessage(text: "Finished 🏁")
+            }
+        } else {
+            view?.showToastMessage(text: "Finished 🏁")
+        }
+    }
+    
+    func resetWordLabelPosition() {
+        self.view?.resetWordLabelPosition()
     }
     
     func timeFinishedAction() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.view?.resetWordLabelPosition()
+        if round < 10 {
+            round += 1
+            view?.setRoundLabelText(text: "Round: \(round)")
+            moveNextWord()
         }
     }
+    
+    func pickRightWord() {
+        let word = words[currentIndex]
+        wordText = word.textEng
+        translationText = word.textSPA
+    }
+    
+    func pickRandomWord() {
+        let word = words[currentIndex]
+        let randomWordIndex = Int.random(in: 0..<words.count)
+        let randomWord = words[randomWordIndex]
+        wordText = randomWord.textEng
+        translationText = word.textSPA
+    }
+
+    func moveNextWord() {
+        currentIndex = Int.random(in: 0..<words.count)
+        
+        let number = Int.random(in: 0...9)
+        if number % 2 == 0 {
+            pickRightWord()
+        } else {
+            pickRandomWord()
+        }
+        
+        view?.setWordLabelText(text: wordText)
+        view?.setTranslationLabelText(text: translationText)
+        resetWordLabelPosition()
+        
+        fallWordLabel()
+    }
+    
 }
 
 extension GamePresenter: GameInteractorOutput {

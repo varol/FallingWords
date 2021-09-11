@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F991935D26ED08E4009CD2C9 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991935C26ED08E4009CD2C9 /* Toast.swift */; };
 		F9CF7DEB26EC9E330071EC12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9CF7DEA26EC9E330071EC12 /* Assets.xcassets */; };
 		F9CF7DEE26EC9E330071EC12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9CF7DEC26EC9E330071EC12 /* LaunchScreen.storyboard */; };
 		F9CF7DF926EC9E330071EC12 /* FallingWordsGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF7DF826EC9E330071EC12 /* FallingWordsGameTests.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F991935C26ED08E4009CD2C9 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		F9CF7DDE26EC9E310071EC12 /* FallingWordsGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FallingWordsGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9CF7DEA26EC9E330071EC12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9CF7DED26EC9E330071EC12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				F9CF7E3526ECA6250071EC12 /* LoadingShowable.swift */,
+				F991935C26ED08E4009CD2C9 /* Toast.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				F9CF7E3F26ECBC1E0071EC12 /* BaseButton.swift in Sources */,
 				F9CF7E0926EC9F300071EC12 /* SplashRouter.swift in Sources */,
 				F9CF7E2B26ECA2EE0071EC12 /* HomeViewController.swift in Sources */,
+				F991935D26ED08E4009CD2C9 /* Toast.swift in Sources */,
 				F9CF7E1C26ECA2210071EC12 /* GamePresenter.swift in Sources */,
 				F9CF7E1F26ECA2210071EC12 /* GameInteractor.swift in Sources */,
 				F9CF7E0E26EC9F560071EC12 /* SplashViewController.swift in Sources */,

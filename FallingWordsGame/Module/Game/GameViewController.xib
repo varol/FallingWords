@@ -9,8 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameViewController" customModule="FallingWordsGame" customModuleProvider="target">
             <connections>
+                <outlet property="roundLabel" destination="bVn-ko-TO6" id="2Eb-rm-Xny"/>
                 <outlet property="scoreLabel" destination="PtA-6f-FqT" id="uTi-SO-l4i"/>
-                <outlet property="timeLabel" destination="JEY-YY-heQ" id="zGw-DM-5c5"/>
                 <outlet property="translationLabel" destination="mzl-J4-7Zj" id="0Oa-z3-njU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wordLabel" destination="6FU-Pi-YIh" id="HEg-NI-enf"/>
@@ -47,7 +47,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6HW-PL-lpp">
                     <rect key="frame" x="40" y="64" width="334" height="20.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEY-YY-heQ" customClass="BaseLabel" customModule="FallingWordsGame">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Round" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVn-ko-TO6" customClass="BaseLabel" customModule="FallingWordsGame">
                             <rect key="frame" x="0.0" y="0.0" width="167" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>

@@ -15,35 +15,40 @@ protocol GameViewControllerInterface: class {
     func getViewHeight() -> Int
     func setWordLabelText(text: String)
     func setTranslationLabelText(text: String)
-    func setTimeLabelText(text: String)
     func setScoreLabelText(text: String)
+    func setRoundLabelText(text: String)
+    func showToastMessage(text: String)
+    func getAnimationStatus() -> Bool
 }
 
 class GameViewController: UIViewController {
-    @IBOutlet private weak var timeLabel: BaseLabel!
     @IBOutlet private weak var scoreLabel: BaseLabel!
     @IBOutlet private weak var wordLabel: BaseLabel!
     @IBOutlet private weak var translationLabel: BaseLabel!
+    @IBOutlet private weak var roundLabel: BaseLabel!
     
     var presenter: GamePresenterInterface!
-    
+    var animator: UIViewPropertyAnimator?
+    private var fallingWordYPossition: CGFloat = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
     }
     
     @IBAction private func rightAnswerButtonTapped() {
+        view.layer.removeAllAnimations()
         presenter.chooseRightAnswer()
     }
     
     @IBAction func wrongAnswerButtonTapped(_ sender: Any) {
+        view.layer.removeAllAnimations()
         presenter.chooseWrongAnswer()
     }
     
 }
 
 extension GameViewController: GameViewControllerInterface {
-    
     func setTitle(_ title: String) {
         self.title = title
     }
@@ -53,24 +58,36 @@ extension GameViewController: GameViewControllerInterface {
     }
     
     func fallWordLabel() {
-        let duration = TimeInterval(presenter.getGameTimeInterval())
-        UIView.animate(withDuration: duration, animations: {
+        let duration = TimeInterval(self.presenter.getGameTimeInterval())
+        
+        UIView.animate(withDuration: duration,
+                       delay: .zero,
+                       options: [.beginFromCurrentState],
+                       animations: {
+                        
             self.changeWordLabelPosition()
-        }, completion: { (finished: Bool) in
-            if finished {
+        }) { (finished) in
+            if finished == true {
                 self.presenter.timeFinishedAction()
             }
-        })
+        }
     }
     
     func changeWordLabelPosition() {
-        wordLabel?.center.y = CGFloat(presenter.getWordLabelFinishPosition())
+        self.wordLabel.transform = CGAffineTransform(translationX: self.wordLabel.bounds.origin.x,
+                                                     y: CGFloat(self.presenter.getWordLabelFinishPosition()))
+
     }
     
     func resetWordLabelPosition() {
-        wordLabel.center.y = CGFloat(presenter.getWordLabelInitialPosition())
+        view.layer.removeAllAnimations()
+        wordLabel.layer.removeAllAnimations()
+        view.layer.layoutIfNeeded()
+        UIView.animate(withDuration: .zero) {
+            self.wordLabel.transform = .identity
+        }
     }
-
+    
     func setWordLabelText(text: String) {
         wordLabel.text = text
     }
@@ -79,11 +96,19 @@ extension GameViewController: GameViewControllerInterface {
         translationLabel.text = text
     }
     
-    func setTimeLabelText(text: String) {
-        timeLabel.text = text
-    }
-    
     func setScoreLabelText(text: String) {
         scoreLabel.text = text
+    }
+    
+    func setRoundLabelText(text: String) {
+        roundLabel.text = text
+    }
+    
+    func showToastMessage(text: String) {
+        view.makeToast(text)
+    }
+    
+    func getAnimationStatus() -> Bool {
+        animator?.isRunning ?? false
     }
 }
