@@ -30,6 +30,11 @@
 		F9CF7E3326ECA5460071EC12 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF7E3226ECA5460071EC12 /* BaseViewController.swift */; };
 		F9CF7E3626ECA6250071EC12 /* LoadingShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF7E3526ECA6250071EC12 /* LoadingShowable.swift */; };
 		F9CF7E3A26ECA6730071EC12 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF7E3926ECA6730071EC12 /* LoadingView.swift */; };
+		F9CF7E3D26ECB7350071EC12 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF7E3C26ECB7350071EC12 /* BaseLabel.swift */; };
+		F9CF7E3F26ECBC1E0071EC12 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF7E3E26ECBC1E0071EC12 /* BaseButton.swift */; };
+		F9CF7E4226ECC4D30071EC12 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = F9CF7E4126ECC4D30071EC12 /* words.json */; };
+		F9CF7E4326ECC4D90071EC12 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = F9CF7E4126ECC4D30071EC12 /* words.json */; };
+		F9CF7E4526ECC51E0071EC12 /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF7E4426ECC51E0071EC12 /* WordModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +75,10 @@
 		F9CF7E3226ECA5460071EC12 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F9CF7E3526ECA6250071EC12 /* LoadingShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingShowable.swift; sourceTree = "<group>"; };
 		F9CF7E3926ECA6730071EC12 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		F9CF7E3C26ECB7350071EC12 /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
+		F9CF7E3E26ECBC1E0071EC12 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		F9CF7E4126ECC4D30071EC12 /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
+		F9CF7E4426ECC51E0071EC12 /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +120,7 @@
 		F9CF7DE026EC9E310071EC12 /* FallingWordsGame */ = {
 			isa = PBXGroup;
 			children = (
+				F9CF7E4026ECC4C00071EC12 /* Data */,
 				F9CF7DEC26EC9E330071EC12 /* LaunchScreen.storyboard */,
 				F9CF7E0326EC9E5D0071EC12 /* App */,
 				F9CF7E3826ECA65D0071EC12 /* Resources */,
@@ -191,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				F9CF7E3226ECA5460071EC12 /* BaseViewController.swift */,
+				F9CF7E3C26ECB7350071EC12 /* BaseLabel.swift */,
+				F9CF7E3E26ECBC1E0071EC12 /* BaseButton.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -223,8 +235,17 @@
 		F9CF7E3B26ECAB620071EC12 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				F9CF7E4426ECC51E0071EC12 /* WordModel.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		F9CF7E4026ECC4C00071EC12 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F9CF7E4126ECC4D30071EC12 /* words.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +332,7 @@
 				F9CF7DEE26EC9E330071EC12 /* LaunchScreen.storyboard in Resources */,
 				F9CF7E0F26EC9F560071EC12 /* SplashViewController.xib in Resources */,
 				F9CF7DEB26EC9E330071EC12 /* Assets.xcassets in Resources */,
+				F9CF7E4226ECC4D30071EC12 /* words.json in Resources */,
 				F9CF7E2C26ECA2EE0071EC12 /* HomeViewController.xib in Resources */,
 				F9CF7E3026ECA3070071EC12 /* GameViewController.xib in Resources */,
 			);
@@ -320,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9CF7E4326ECC4D90071EC12 /* words.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,13 +354,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9CF7E2F26ECA3070071EC12 /* GameViewController.swift in Sources */,
+				F9CF7E3D26ECB7350071EC12 /* BaseLabel.swift in Sources */,
 				F9CF7E1526ECA0DC0071EC12 /* AppDelegate.swift in Sources */,
 				F9CF7E2626ECA2440071EC12 /* HomeRouter.swift in Sources */,
 				F9CF7E3626ECA6250071EC12 /* LoadingShowable.swift in Sources */,
+				F9CF7E4526ECC51E0071EC12 /* WordModel.swift in Sources */,
 				F9CF7E3A26ECA6730071EC12 /* LoadingView.swift in Sources */,
 				F9CF7E1426ECA0DC0071EC12 /* SceneDelegate.swift in Sources */,
 				F9CF7E0B26EC9F300071EC12 /* SplashInteractor.swift in Sources */,
 				F9CF7E3326ECA5460071EC12 /* BaseViewController.swift in Sources */,
+				F9CF7E3F26ECBC1E0071EC12 /* BaseButton.swift in Sources */,
 				F9CF7E0926EC9F300071EC12 /* SplashRouter.swift in Sources */,
 				F9CF7E2B26ECA2EE0071EC12 /* HomeViewController.swift in Sources */,
 				F9CF7E1C26ECA2210071EC12 /* GamePresenter.swift in Sources */,

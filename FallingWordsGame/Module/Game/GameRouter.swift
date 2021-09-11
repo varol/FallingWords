@@ -13,7 +13,6 @@ protocol GameRouterInterface: class {
 }
 
 enum GameRoutes {
-    
 }
 
 class GameRouter: NSObject {

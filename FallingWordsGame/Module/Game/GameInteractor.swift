@@ -9,17 +9,35 @@
 import Foundation
 
 protocol GameInteractorInterface: class {
-
+    func fetchWordData()
 }
 
-protocol GameInteractorOutputInterface: class {
-
+protocol GameInteractorOutput: class {
+    func fetchWordDataOutput(result: WordResult)
 }
+
+typealias WordResult = Result<Word,Error>
 
 final class GameInteractor {
-    var output: GameInteractorOutputInterface?
+    var output: GameInteractorOutput?
 }
 
 extension GameInteractor: GameInteractorInterface {
+    func fetchWordData() {
+        guard let path = Bundle.main.path(forResource: "words", ofType: "json") else { return }
+        let result = decodeJSON(with: Word.self, path: path)
+        self.output?.fetchWordDataOutput(result: result)
+    }
+    
+    func decodeJSON <T: Decodable>(with type: T.Type, path: String) -> Result<T, Error> {
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+            let decoder = JSONDecoder()
+            let result = try decoder.decode(type.self, from: data)
+            return .success(result)
+        } catch let error {
+            return .failure(error)
+        }
+    }
 
 }

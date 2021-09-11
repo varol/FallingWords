@@ -13,8 +13,13 @@ protocol HomePresenterInterface: AnyObject {
     func navigateToGameScreen()
 }
 
+extension HomePresenter {
+    fileprivate enum Constants {
+        static let pageTitle: String = "Falling Words"
+    }
+}
+
 final class HomePresenter: HomePresenterInterface {
-    
     
     weak var view: HomeViewControllerInterface?
     let router: HomeRouterInterface!
@@ -27,7 +32,7 @@ final class HomePresenter: HomePresenterInterface {
     }
     
     func viewDidLoad() {
-        view?.setTitle("Falling Words")
+        view?.setTitle(Constants.pageTitle)
     }
     
     func navigateToGameScreen() {
