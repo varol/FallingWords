@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GameViewControllerInterface: class {
+protocol GameViewControllerInterface: AnyObject {
     func setTitle(_ title: String)
     func startFallingWordLabel()
     func resetWordLabelPosition()

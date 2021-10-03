@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol GameInteractorInterface: class {
+protocol GameInteractorInterface: AnyObject {
     func fetchWordData()
 }
 
-protocol GameInteractorOutput: class {
+protocol GameInteractorOutput: AnyObject {
     func fetchWordDataOutput(result: WordResult)
 }
 

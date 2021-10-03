@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GamePresenterInterface: class {
+protocol GamePresenterInterface: AnyObject {
     func viewDidLoad()
     func getWordLabelInitialPosition() -> Int
     func getWordLabelFinishPosition() -> Int

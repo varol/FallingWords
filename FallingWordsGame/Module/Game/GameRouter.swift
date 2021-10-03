@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GameRouterInterface: class {
+protocol GameRouterInterface: AnyObject {
     func navigate(_ route: GameRoutes)
 }
 
